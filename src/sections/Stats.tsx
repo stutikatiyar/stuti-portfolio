@@ -1,25 +1,38 @@
 export default function Stats() {
-  const stats = [
-    { value: "15+", label: "REST APIs Built" },
-    { value: "70%", label: "Monitoring Reduction" },
-    { value: "3+", label: "Production Projects" },
-    { value: "70+", label: "Students Coordinated" },
-  ];
-
   return (
-    <section className="py-20">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-        {stats.map((stat) => (
-          <div key={stat.label} className="text-center">
-            <h3 className="text-4xl font-bold text-cyan-400">
-              {stat.value}
-            </h3>
-            <p className="text-slate-400 mt-2">
-              {stat.label}
-            </p>
-          </div>
-        ))}
+    <section className="max-w-7xl mx-auto px-6 py-20">
+
+      <div className="grid grid-cols-3 gap-6">
+
+        <div className="p-8 border border-white/10 rounded-3xl">
+          <h3 className="text-4xl text-cyan-400">
+            9.35
+          </h3>
+          <p className="text-slate-400">
+            CGPA
+          </p>
+        </div>
+
+        <div className="p-8 border border-white/10 rounded-3xl">
+          <h3 className="text-4xl text-cyan-400">
+            300+
+          </h3>
+          <p className="text-slate-400">
+            LeetCode
+          </p>
+        </div>
+
+        <div className="p-8 border border-white/10 rounded-3xl">
+          <h3 className="text-4xl text-cyan-400">
+            5+
+          </h3>
+          <p className="text-slate-400">
+            Projects
+          </p>
+        </div>
+
       </div>
+
     </section>
   );
 }
