@@ -82,16 +82,7 @@ export default function Hero() {
             <div className="relative overflow-visible">
 
               {/* Glow Behind Laptop */}
-              <div
-                className="
-                absolute
-                inset-0
-                z-10
-                bg-cyan-500/10
-                blur-[120px]
-                scale-125
-                "
-              />
+             <div className="absolute inset-0 -z-10 bg-cyan-500/10 blur-[120px] scale-125" />
 
                             <div className="absolute z-20 -left-10 top-10 px-4 py-2 rounded-xl border border-cyan-400/20 bg-slate-900/80 backdrop-blur-xl text-cyan-300 text-sm">
                 Next.js
@@ -107,6 +98,7 @@ export default function Hero() {
 
               {/* Floating Laptop */}
               <motion.div
+              className="relative z-10"
                 animate={{
                   y: [0, -10, 0],
                 }}
@@ -116,19 +108,8 @@ export default function Hero() {
                   ease: "easeInOut",
                 }}
               >
-                <div
-                  className="
-                  w-[520px]
-                  rounded-[28px]
-                  border
-                  border-white/10
-                  bg-gradient-to-br
-                  from-slate-900
-                  to-slate-950
-                  shadow-[0_0_80px_rgba(34,211,238,0.12)]
-                  p-5
-                  "
-                >
+                <div className="w-[520px] rounded-[28px] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 shadow-[0_0_80px_rgba(34,211,238,0.12)] p-5">
+                
                   {/* Browser Bar */}
                   <div className="flex gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
