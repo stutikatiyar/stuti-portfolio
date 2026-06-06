@@ -1,8 +1,68 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Message sent successfully!");
+
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert("Failed to send message");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
-      className="max-w-7xl mx-auto px-6 py-24"
+      className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24"
     >
       <p className="text-purple-400 uppercase tracking-widest text-center mb-4">
         — LET&apos;S CONNECT
@@ -23,20 +83,30 @@ export default function Contact() {
 
       <div className="grid lg:grid-cols-3 gap-8">
 
-        {/* Left Form */}
-        <div className="lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
-
+        {/* Contact Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
+        >
           <div className="grid md:grid-cols-2 gap-4 mb-4">
 
             <input
               type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Your Name"
+              required
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none"
             />
 
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email Address"
+              required
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none"
             />
 
@@ -44,24 +114,32 @@ export default function Contact() {
 
           <input
             type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
             placeholder="Internship / Freelance / Collaboration"
+            required
             className="w-full mb-4 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none"
           />
 
           <textarea
             rows={6}
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             placeholder="Tell me about your project or opportunity..."
+            required
             className="w-full mb-6 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none resize-none"
           />
 
-          <a
-            href="mailto:stutikatiyarof@gmail.com"
-            className="block text-center rounded-xl py-4 font-semibold text-white bg-gradient-to-r from-cyan-500 to-purple-500 hover:opacity-90 transition"
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-xl py-4 font-semibold text-white bg-gradient-to-r from-cyan-500 to-purple-500 hover:opacity-90 transition disabled:opacity-50"
           >
-            Send Message →
-          </a>
-
-        </div>
+            {loading ? "Sending..." : "Send Message →"}
+          </button>
+        </form>
 
         {/* Right Cards */}
         <div className="space-y-6">
@@ -116,6 +194,7 @@ export default function Contact() {
             <a
               href="https://github.com/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-cyan-400"
             >
               View Profile →
