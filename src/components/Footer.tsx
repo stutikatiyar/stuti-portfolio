@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:justify-between gap-4">
 
           <p className="text-slate-500 text-sm">
-            © 2026 Stuti Katiyar. All Rights Reserved.
+            © {new Date().getFullYear()} Stuti Katiyar. All Rights Reserved.
           </p>
 
           <p className="text-slate-500 text-sm">
